@@ -13,8 +13,8 @@ fi
 KONG_IP=$KONG_HOST
 
 # Remove existing routes
-ALL_APIS="loans deposits inquiry funds transactions"
-AUTH_RESTRICTED_APIS="consul"
+ALL_APIS="go-microservice"
+AUTH_RESTRICTED_APIS=""
 
 configure_users() {
     # Create basic auth consumer
@@ -38,10 +38,10 @@ start () {
     done
 
     # Add the routes
-    add_api_with_path loans_summary http://loans-service:8080/loans true /api/loans
-    add_api_with_path loans_details http://loans-service:8080/loans/{id} true /ppc/loans/{id}
-    add_api_with_host consul http://consul-ui:8500 "consul-aws-blueocean.com"
-    add_api_with_host "client_docs" "http://client_docs:3000" "client-aws-blueocean.com"
+    add_api_with_host go-microservice http://go-microservice.apps.svc.cluster.local:8080 "example-service.com"
+    #add_api_with_host "client_docs" "http://client_docs:3000" "client-aws-blueocean.com"
+    #add_api_with_path loans_summary http://loans-service:8080/loans true /api/loans
+    #add_api_with_path loans_details http://loans-service:8080/loans/{id} true /ppc/loans/{id}
 
     for api in $ALL_APIS; do
         add_correlation_id $api
