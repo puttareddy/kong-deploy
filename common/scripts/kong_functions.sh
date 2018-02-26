@@ -7,7 +7,7 @@ curl -sS -i -X POST --url $KONG_IP/apis/ \
         --data "name=$1" \
         --data "upstream_url=$2" \
         --data "strip_request_path=$3" \
-        --data "request_path=$4"
+        --data "uris=$4"
 }
 # api_name , upstream_url, request_host
 add_api_with_host() {
@@ -15,7 +15,7 @@ echo "add_api_with_host $1 $2 $3"
 curl -sS -i -X POST --url $KONG_IP/apis/ \
         --data "name=$1" \
         --data "upstream_url=$2" \
-        --data "request_host=$3"
+        --data "hosts=$3"
 
 }
 # api_name or id
